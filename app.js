@@ -14,8 +14,14 @@ function UI(){}
 
 // grabbing book-form id and listening for a submit event
 document.getElementById('book-form').addEventListener('submit', function(event){
+// getting form values
     const title = document.getElementById('title').value
     const author = document.getElementById('author').value
     const isbn = document.getElementById('isbn').value
-    event.preventDefault()
+// instantiating new book
+const book = new Book(title, author, isbn)
+// instantiating UI display for book 
+const ui = new UI()
+ui.addBookToList(book)
+event.preventDefault()
 });
