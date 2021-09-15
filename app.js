@@ -5,15 +5,15 @@ function Book(title, author, isbn) {
     this.isbn = isbn;
   }
   
-  // UI Constructor
+  // UI Constructor - add or remove books from list, showing alerts on the user interface, etc
   function UI() {}
   
-  // Add Book To List
+  // adding book to list on the DOM
   UI.prototype.addBookToList = function(book){
     const list = document.getElementById('book-list');
-    // Create tr element
+    // creating the table row element 
     const row = document.createElement('tr');
-    // Insert cols
+    // creating columns on the table to continuously show new books added
     row.innerHTML = `
       <td>${book.title}</td>
       <td>${book.author}</td>
@@ -60,30 +60,33 @@ function Book(title, author, isbn) {
   }
   
   // event listener for adding book item
+  // event listeners will take in the event and the action that needs to be taken
+  // both the event and action will be the event listener's arguments
   document.getElementById('book-form').addEventListener('submit', function(e){
-    // Get form values
+    // getting form values
+    // the .value is literally what the user input is
     const title = document.getElementById('title').value,
           author = document.getElementById('author').value,
           isbn = document.getElementById('isbn').value
   
-    // Instantiate book
+    // instantiating a new book
     const book = new Book(title, author, isbn);
   
-    // Instantiate UI
+    // instantiating the new ui onto the DOM
     const ui = new UI();
   
-    // Validate
+    // checking for validations
     if(title === '' || author === '' || isbn === '') {
-      // Error alert
+      // showing alert 
       ui.showAlert('Please fill in all fields', 'error');
     } else {
-      // Add book to list
+      // adding book to the list
       ui.addBookToList(book);
   
-      // Show success
+      // success message
       ui.showAlert('Book Added!', 'success');
     
-      // Clear fields
+      // clearing input fields after successful addition
       ui.clearFields();
     }
   
@@ -94,6 +97,7 @@ function Book(title, author, isbn) {
   document.getElementById('book-list').addEventListener('click', function(event){
       const ui = new UI()
       ui.deleteBook(event.target)
+      
       // showing alert after delete
       ui.showAlert('Book removed!', 'success')
       event.preventDefault()
