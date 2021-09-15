@@ -5,3 +5,14 @@ class Book{
         this.isbn = isbn 
     } 
 }
+
+class UI{
+    addBookToList(book){
+    }
+    showAlert(message, className){
+    }
+    deleteBook(target){   
+    }
+    clearFields(){
+    }
+}
