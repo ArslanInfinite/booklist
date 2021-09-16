@@ -54,7 +54,17 @@ class Book {
       document.getElementById('isbn').value = '';
     }
   }
+ 
+  // local storage class - to add or remove an instantiating item to or from the local storage
   
+  class Storage {
+    // getBooks() responsible for fetching books from local storage
+    static getBooks(){}
+    static displayBooks(){}
+    static addBook(){}
+    static removeBook(){}
+  }
+
   // Event Listener for add book
   document.getElementById('book-form').addEventListener('submit', function(e){
     // Get form values

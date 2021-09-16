@@ -71,7 +71,7 @@ function Book(title, author, isbn) {
   
     // instantiating a new book
     const book = new Book(title, author, isbn);
-  
+    console.log(book)
     // instantiating the new ui onto the DOM
     const ui = new UI();
   
@@ -89,7 +89,6 @@ function Book(title, author, isbn) {
       // clearing input fields after successful addition
       ui.clearFields()
     }
-  
     event.preventDefault()
   });
 
@@ -102,3 +101,4 @@ function Book(title, author, isbn) {
     ui.showAlert('Book removed!', 'success')
     event.preventDefault()
   })
+
