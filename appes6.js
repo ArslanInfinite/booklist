@@ -57,13 +57,43 @@ class Book {
  
   // local storage class - to add or remove an instantiating item to or from the local storage
   
-  class Storage {
+  class Store {
     // getBooks() responsible for fetching books from local storage
-    static getBooks(){}
-    static displayBooks(){}
-    static addBook(){}
+    // if books === null, then books will be an empty array since it doesn't exist yet
+    // if there are any books then the books will be parsed as a JSON object 
+    static getBooks(){
+      let books
+      if(localStorage.getItem('books') === null){
+        books = []
+      } else {
+        books = JSON.parse(localStorage.getItem('books'))
+      }
+      return books
+    }
+
+    static displayBooks(){
+      // get books from the static Store getbooks method
+      const books = Store.getBooks()
+      // loop through each book and display it on the UI
+      books.forEach(function(book){
+        // instantiate a new UI object to put the books onto
+        const ui = new UI()
+        // add book to UI
+        ui.addBookToList(book)
+      })
+    }
+
+    static addBook(book){
+      const books = Store.getBooks()
+      books.push(book)
+      localStorage.setItem('books', JSON.stringify('books'))
+    }
+
     static removeBook(){}
   }
+
+  // on DOM load event
+  document.addEventListener('DOMContentLoaded', Store.displayBooks)
 
   // Event Listener for add book
   document.getElementById('book-form').addEventListener('submit', function(e){
@@ -87,6 +117,10 @@ class Book {
     } else {
       // Add book to list
       ui.addBookToList(book);
+
+      // add to local storage, as static methods
+
+      Store.addBook(book)
   
       // Show success
       ui.showAlert('Book Added!', 'success');
